@@ -14,8 +14,8 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @user = current_user
     @book = Book.new
+    #@user = current_user
   end
 
   def edit
@@ -29,6 +29,20 @@ class UsersController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def following
+    @title = "Follows"
+    @user  = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follow'
   end
 
   private

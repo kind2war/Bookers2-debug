@@ -1,4 +1,6 @@
-<table class='table'>
+<% provide(:title, @title) %>
+<h3><%= @title %></h3>
+ <table class='table'>
   <thead>
     <tr>
       <th style="width: 10%">image</th>
@@ -8,13 +10,13 @@
     </tr>
   </thead>
   <tbody>
-    <% users.each do |user| %>
+    <% @users.each do |user| %>
       <tr>
         <td><%= image_tag user.get_profile_image, size: '80x80' %></td>
         <td><%= user.name %></td>
         <td>フォロー数:<%= user.following.count %></td>
         <td>フォロワー数:<%= user.followers.count %></td>
-        <td><%#= render 'users/follow_form', user: user if !(user == current_user)%></td>
+        <td></td>
         <td><%= link_to 'Show', user %></td>
       </tr>
     <% end %>

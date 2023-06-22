@@ -13,9 +13,9 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.all
     @book = Book.new
-    #@user = current_user
+    @users = User.all
+    @user  = current_user
   end
 
   def edit
@@ -32,14 +32,14 @@ class UsersController < ApplicationController
   end
 
   def following
-    @title = "Follows"
+    @title = "Follow Users"
     @user  = User.find(params[:id])
     @users = @user.following
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "Followers Users"
     @user  = User.find(params[:id])
     @users = @user.followers
     render 'show_follow'

@@ -14,7 +14,8 @@
         <td><%= user.name %></td>
         <td>フォロー数:<%= user.following.count %></td>
         <td>フォロワー数:<%= user.followers.count %></td>
-        <td><%#= render 'users/follow_form', user: user if !(user == current_user)%></td>
+        <td><%= render partial: 'users/follow_form', locals:{user: user } if !(user == current_user)%></td>
+<!--今回一番てこずったのが、↑のrenderメソッド。「partial:」と特に「locals:{}」の記述がなかったばかりに、上手く変数を渡すことができず、機能を正常に実装できずに一日を費やした。-->
         <td><%= link_to 'Show', user %></td>
       </tr>
     <% end %>

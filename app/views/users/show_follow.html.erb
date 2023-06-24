@@ -1,24 +1,28 @@
-<% provide(:title, @title) %>
-<h3><%= @title %></h3>
- <table class='table'>
-  <thead>
-    <tr>
-      <th style="width: 10%">image</th>
-      <th style="width: 10%">name</th>
-      <th colspan="2" style="width: 35%"></th>
-      <th colspan="4"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
+<% if @users.exists? %>
+  <% provide(:title, @title) %>
+  <h3><%= @title %></h3>
+   <table class='table'>
+    <thead>
       <tr>
-        <td><%= image_tag user.get_profile_image, size: '80x80' %></td>
-        <td><%= user.name %></td>
-        <td>フォロー数:<%= user.following.count %></td>
-        <td>フォロワー数:<%= user.followers.count %></td>
-        <td></td>
-        <td><%= link_to 'Show', user %></td>
+        <th style="width: 10%">image</th>
+        <th style="width: 10%">name</th>
+        <th colspan="2" style="width: 35%"></th>
+        <th colspan="4"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.get_profile_image, size: '80x80' %></td>
+          <td><%= user.name %></td>
+          <td>フォロー数:<%= user.following.count %></td>
+          <td>フォロワー数:<%= user.followers.count %></td>
+          <td></td>
+          <td><%= link_to 'Show', user %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

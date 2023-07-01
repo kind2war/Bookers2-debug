@@ -10,19 +10,17 @@ import "channels"
 import "jquery"
 import "popper.js"
 import "bootstrap"
-
-import Raty from "raty.js"
-window.raty = function(elem,opt) {
-  let raty =  new Raty(elem,opt)
-  raty.init();
-  return raty;
-}
-
 import "../stylesheets/application"
+window.$ = window.jQuery = require('jquery');
+import Raty from "raty.js"
+  window.raty = function(elem,opt) {
+    let raty =  new Raty(elem,opt)
+    raty.init();
+    return raty;
+  }
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
-window.$ = window.jQuery = require('jquery');
-require('packs/raty')
+

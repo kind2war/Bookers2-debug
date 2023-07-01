@@ -1,9 +1,11 @@
-<div id="post_raty"></div>
-<script>
-  // scriptファイルをどのidの部分に配置するかを指定
-  let elem = document.querySelector('#post_raty');
-  let opt = {  
-    //星画像の指定などのオプションをここに記述,
-   };
-  raty(elem,opt);
-</script>
+<div id="star-rate<%= @book.id %>"></div>
+  <script>
+    new Raty(document.querySelector('[star-rate<%= @book.id %>]'), {
+      size     : 36,
+      score: 3,
+      starOff:  '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      half: false,
+      score: <%= @book.star %>,
+    }).init();
+  </script>

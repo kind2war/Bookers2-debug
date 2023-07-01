@@ -4,36 +4,37 @@
     <%= f.text_field :title, class: 'form-control book_title' %>
   </div>
   <div class="form-group">
-    <%= f.label :opinion %>
+    <%= f.label :body %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
 
   <% if book.id.nil? %>
     <div class="form-group" id="post_raty">
-      <%= f.label :star %>
+      <%= f.label :star %></br>
       <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.submit class: 'btn btn-success' %><br>
     </div>
     <script>
-      $(document).on('turbolinks:load', function() {
+      $(document).on('turbolinks:load', function() {      //この１文で、初回読み込み、リロード、ページ切り替えで動く。//
         let elem = document.querySelector('#post_raty');
         if (elem == null) return;
 
-        elem.innerHTML = ""
-        let opt = {
+        elem.innerHTML = ""    // innerHTML:指定要素に変数の値を代入
+        let opt = {            // HTML要素の中身を変更するときに使われるプロパティで、動的なwebページを作成できる。
     			size: 36,
           score: 3,
           starOff:  '<%= asset_path('star-off.png') %>',
-          starOn: '<%= asset_path('star-on.png') %>',
+          starOn: '<%= asset_path('star-on.png') %>',   //なぜ散々ビューに現れなかったのに、上手く行くようになったのだろう。
           scoreName: 'book[star]',
           half: false,
         };
         raty(elem, opt);
       });
     </script>
-  <% else %>
+
+  <% else %>                   <!--以下、既存の投稿のための処理-->
     <div class="form-group">
       <%= render "static.rate", book: book %>
       </div>

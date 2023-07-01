@@ -11,12 +11,12 @@ import "jquery"
 import "popper.js"
 import "bootstrap"
 import "../stylesheets/application"
-window.$ = window.jQuery = require('jquery');
+window.$ = window.jQuery = require('jquery'); //windowオブジェクト
 import Raty from "raty.js"
-window.raty = function(elem,opt) {
-  let raty =  new Raty(elem,opt)
-  raty.init();
-  return raty;
+window.raty = function(elem,opt) {            //raty.jsから Raty というオブジェクトをインポートして、
+  let raty =  new Raty(elem,opt)              //グローバル変数の window.raty に設定
+  raty.init();                                //function(関数)で様々な処理をひとつにまとめている。
+  return raty;                                //動的。ループさせている。
 }
 
 Rails.start()

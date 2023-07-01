@@ -7,21 +7,38 @@
     <%= f.label :opinion %>
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
-  <div class="form-group" id="star">Rate</div>
-  <div class="form-group">
-    <%= f.submit class: 'btn btn-success' %><br>
-  </div>
-  <script class="form-group">
-    let elem = document.querySelector('#star');
-    let opt = {
-      size: 36,
-      score: 3,
-      starOff:  '<%= asset_path('star-off.png') %>',
-      starOn: '<%= asset_path('star-on.png') %>',
-      scoreName: 'book[star]',
-      half: false,
-    };
-    raty(elem,opt);
-  </script>
-<% end %>
 
+  <% if book.id.nil? %>
+    <div class="form-group" id="post_raty">
+      <%= f.label :star %>
+      <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: 'btn btn-success' %><br>
+    </div>
+    <script>
+      $(document).on('turbolinks:load', function() {
+        let elem = document.querySelector('#post_raty');
+        if (elem == null) return;
+
+        elem.innerHTML = ""
+        let opt = {
+    			size: 36,
+          score: 3,
+          starOff:  '<%= asset_path('star-off.png') %>',
+          starOn: '<%= asset_path('star-on.png') %>',
+          scoreName: 'book[star]',
+          half: false,
+        };
+        raty(elem, opt);
+      });
+    </script>
+  <% else %>
+    <div class="form-group">
+      <%= render "static.rate", book: book %>
+      </div>
+      <div class="form-group">
+        <%= f.submit class: 'btn btn-success' %><br>
+        </div>
+<% end %>
+<% end %>

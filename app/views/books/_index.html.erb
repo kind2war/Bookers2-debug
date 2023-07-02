@@ -1,17 +1,13 @@
-<table class='table table-hover table-inverse'>
+<table class='table table-hover table-inverse' id="sort_table">
   <thead>
     <tr>
       <th></th>
       <th>Title</th>
-      <th>Opinion</th>
-      <th colspan="3"></th>
-<!--
-      <th style="width: 20%">Title</th>
-      <th style="width: 35%">Opinion</th>
-      <th colspan="3" style="width: 30%"></th>
--->
+      <th class="updated_at">Opinion</th>
+      <th colspan="4"></th>
     </tr>
   </thead>
+
   <tbody>
     <% books.each do |book| %>
       <tr>
@@ -26,6 +22,7 @@
         </td>
         <td><%= link_to "コメント数: #{book.book_comments.count}" ,book_path(book.id) %> </td>
         <td><%= render "books/static.rate", book: book %></td>
+        <td><% book.updated_at %></td>
       </tr>
     <% end %>
   </tbody>

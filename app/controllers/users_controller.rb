@@ -8,7 +8,18 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @books = @user.books
+    if params[:latest]
+      @books = @user.books.latest
+    elsif params[:old]
+    	@books = @user.books.old
+    elsif params[:star_count]
+    	@books = @user.books.star_count
+    else
+    	@books = @user.books
+    end
+
+    @user = User.find(params[:id])
+    #@books = @user.books
     @book = Book.new
     @book_comment = BookComment.new
   end

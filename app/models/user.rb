@@ -7,6 +7,9 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :book_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  scope :latest, -> {order(updated_at: :DESC)}
+  scope :old, -> {order(updated_at: :ASC)}
+  scope :star_count, -> {order(star: :DESC)}
 
   #==============あるユーザーがフォローしているユーザーとのアソシエーション=================
   has_many :active_relationships, class_name:  "Relationship",

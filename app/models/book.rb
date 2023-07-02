@@ -4,6 +4,9 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   validates :title, presence:true
   validates :body, presence:true,length:{maximum:200}
+  scope :latest, -> {order(updated_at: :DESC)}
+  scope :old, -> {order(updated_at: :ASC)}
+  scope :star_count, -> {order(star: :DESC)}
 
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)

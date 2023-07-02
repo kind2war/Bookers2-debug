@@ -12,6 +12,12 @@ class SearchesController < ApplicationController
           render "searches/search_result"
     end
   end
+
+  def tag_search
+    @books= Book.search(params[:tag])
+    @keyword = params[:tag]
+    render "searches/tag_search_result"
+  end
 end
 
 #検索モデル->params[:range]

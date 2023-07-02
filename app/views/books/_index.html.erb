@@ -1,9 +1,10 @@
-<table class='table table-hover table-inverse' id="sort_table">
+<table class='table table-hover table-inverse'>
   <thead>
     <tr>
       <th></th>
       <th>Title</th>
-      <th class="updated_at">Opinion</th>
+      <th>Opinion</th>
+      <th>Tag</th>
       <th colspan="4"></th>
     </tr>
   </thead>
@@ -16,7 +17,8 @@
           <% end %>
         </td>
         <td><%= link_to book.title,book %></td>
-        <td><%= book.body %></td>
+        <td><%= book.body.truncate(20, omission:"") %></td>
+        <td><%= book.tag %></td>
         <td  id="fav_btn_<%= book.id %>">
           <%= render 'favorites/fav', book: book %>
         </td>

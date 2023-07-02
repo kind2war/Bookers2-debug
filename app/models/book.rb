@@ -4,6 +4,7 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
   validates :title, presence:true
   validates :body, presence:true,length:{maximum:200}
+  validates :tag, presence:false,length:{maximum:20}
   scope :latest, -> {order(updated_at: :DESC)}
   scope :old, -> {order(updated_at: :ASC)}
   scope :star_count, -> {order(star: :DESC)}

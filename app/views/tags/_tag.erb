@@ -1,0 +1,6 @@
+<%= form_with model: [book, tag], local: true do |f| %>
+  <div class="form-group">
+    <%= f.label :tag %>
+    <%= f.text.field :tag, class: "form-control tag" %>
+  </div>
+<% end %>

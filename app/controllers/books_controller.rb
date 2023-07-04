@@ -20,12 +20,15 @@ class BooksController < ApplicationController
     end
     @book = Book.new
     @user = current_user
+    @tag_list = Tag.all
   end
 
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
+    tag_list = params[:book][:tag].split(',')
     if @book.save
+      @book.save_book_tags(tag_list)
       redirect_to book_path(@book), notice: "You have created book successfully."
     else
       @books = Book.all
@@ -36,11 +39,14 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    @tag_list = @book.tags.pluck(:tag).join(',')
   end
 
   def update
     @book = Book.find(params[:id])
+    tag_list=params[:book][:tag].split(',')
     if @book.update(book_params)
+      @book.save_tags(tag_list)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
       render "edit"
@@ -53,10 +59,20 @@ class BooksController < ApplicationController
     redirect_to books_path
   end
 
+  def search_tag
+      #検索結果画面でもタグ一覧表示
+    @tag_list = Tag.all
+      #検索されたタグを受け取る
+    @tag = Tag.find(params[:tag_id])
+      #検索されたタグに紐づく投稿を表示
+    @book = @tag.books
+
+  end
+
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :star, :tag)
+    params.require(:book).permit(:title, :body, :star)
   end
 
   def is_matching_login_user
@@ -65,4 +81,5 @@ class BooksController < ApplicationController
       redirect_to  "/books"
     end
   end
+
 end

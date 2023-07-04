@@ -20,7 +20,7 @@
           <td colspan="4" style="width: 60%"><%= @book.body %></td>
         </tr>
         <tr>
-          <td>Tag:<br><%= link_to @book.tag, tag_search_path(@books) %></td>
+          <td><%= book.tag %></td>
           <td id="fav_btn_<%= @book.id %>">
             <%= render 'favorites/fav', book: @book %>
           </td>

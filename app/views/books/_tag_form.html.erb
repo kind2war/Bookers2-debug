@@ -1,0 +1,13 @@
+<%= form_with model: post_workout , local: true do |f| %>
+：
+	# ここを追加
+        <label>タグ(,で区切ると複数タグ登録できます)</label>
+        <%= f.text_field :name,value: @tag_list, class: 'form-control' %>
+：
+      <% if post_workout.new_record? %>
+        <%= f.submit '新規作成', class: "btn btn-success mt-4" %>
+      <% else %>
+        <%= f.submit '更新する', class: "btn btn-success mt-4" %>
+      <% end %>
+：
+<% end %>

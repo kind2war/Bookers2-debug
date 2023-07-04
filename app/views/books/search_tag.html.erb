@@ -1,8 +1,33 @@
-  <h2>タグが<%=@tag.tag%>の投稿一覧</h2>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class='table table-hover table-inverse'>
 
-  <!--タグリスト-->
-  <% @tag_list.each do |list|%>
-    <i class="fa-sharp fa-solid fa-tag"></i>
-    <%=link_to list.tag,search_tag_path(tag_id: list.id) %>
-    <%="(#{list.books.count})" %>
-  <% end %>
+      <h2>Book search for <%= '"' + @tag.tag +  '"' %></h2>
+    		<% @tag_list.each do |list|%>
+    		    <i class="fa-sharp fa-solid fa-tag"></i>
+     					<%=link_to list.tag,search_tag_path(tag_id: list.id) %>
+    					<%="(#{list.books.count})" %>
+    		<% end %>
+        <tbody>
+          <tr>
+            <th style="width: 20%"></th>
+            <th style="width: 30%">Title</th>
+            <th style="width: 50%">Opinion</th>
+          </tr>
+            <tr>
+              <% @books.each do |book|%>
+              <td><%= image_tag book.user.get_profile_image, size:"100x100" %>
+                  <%= book.user.name %></td>
+              <td><%= link_to book.title, book %></td>
+              <td><%= book.body %></td>
+            </tr>
+              <% end %>
+            <% if @books.count == 0 %>
+              <p>データが見つかりません。</p>
+            <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

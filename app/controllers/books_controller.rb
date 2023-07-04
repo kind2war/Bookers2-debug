@@ -6,9 +6,14 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = User.find(@book.user.id)
     @book_comment = BookComment.new
+
+    @tag_list = @book.tags.pluck(:tag).join(',')
+    @post_book_tags = @book.tags
+
   end
 
   def index
+    @tag_list = Tag.all
     if params[:latest]
       @books = Book.latest
     elsif params[:old]
@@ -20,7 +25,7 @@ class BooksController < ApplicationController
     end
     @book = Book.new
     @user = current_user
-    @tag_list = Tag.all
+
   end
 
   def create
@@ -46,7 +51,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     tag_list=params[:book][:tag].split(',')
     if @book.update(book_params)
-      @book.save_tags(tag_list)
+      @book.save_book_tags(tag_list)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
       render "edit"
@@ -65,7 +70,7 @@ class BooksController < ApplicationController
       #検索されたタグを受け取る
     @tag = Tag.find(params[:tag_id])
       #検索されたタグに紐づく投稿を表示
-    @book = @tag.books
+    @books= @tag.books
 
   end
 

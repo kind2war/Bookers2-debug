@@ -5,8 +5,10 @@ Rails.application.routes.draw do
   get "home/about"=>"homes#about"
   get "search" => "searches#search"
   get "search_tag" => "books#search_tag"
-
-  resources :relationships,       only: [:create, :destroy]
+  resources :users, only: [:show,:edit,:update]
+  resources :messages, only: [:create]
+  resources :rooms, only: [:create,:show]
+  resources :relationships, only: [:create, :destroy]
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update] do
     resources :book_comments, only:[:create, :destroy]
     resource :favorites, only:[:create, :destroy]

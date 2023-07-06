@@ -13,11 +13,6 @@
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
-        <% @tag_list.each do |list|%>
-          <i class="fa-sharp fa-solid fa-tag"></i>
-          <%=link_to list.tag, search_tag_path(tag_id: list.id) %>
-          <%="(#{list.books.count})" %>
-        <% end %>
       <p>
         <%= link_to '新しい順',books_path(latest: "true")%>
         |<%= link_to '古い順', books_path(old: "true")%>

@@ -25,7 +25,6 @@
 
         elem.innerHTML = ""    // innerHTML:指定要素に変数の値を代入
         let opt = {            // HTML要素の中身を変更するときに使われるプロパティで、動的なwebページを作成できる。
-    			size: 36,
           score: 3,
           starOff:  '<%= asset_path('star-off.png') %>',
           starOn: '<%= asset_path('star-on.png') %>',   //なぜ散々ビューに現れなかったのに、上手く行くようになったのだろう。
@@ -43,5 +42,5 @@
       <div class="form-group">
         <%= f.submit class: 'btn btn-success' %><br>
         </div>
-<% end %>
-<% end %>
+  <% end %>
+<%end%>

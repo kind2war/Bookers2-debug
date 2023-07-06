@@ -36,7 +36,7 @@ class Book < ApplicationRecord
     if search != ""
       Book.where(['tag LIKE(?)', "%#{search}%"])
     else
-      Book.includes(:user).order('created_at DESC')
+      Book.includes(:user).order('created_at DESC') #N:1問題
     end
   end
 

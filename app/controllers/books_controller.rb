@@ -6,14 +6,13 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = User.find(@book.user.id)
     @book_comment = BookComment.new
-
     @tag_list = @book.tags.pluck(:tag).join(',')
     @post_book_tags = @book.tags
 
   end
 
   def index
-    @tag_list = Tag.all
+    #@tag_list = Tag.all
     if params[:latest]
       @books = Book.latest
     elsif params[:old]
@@ -21,14 +20,14 @@ class BooksController < ApplicationController
     elsif params[:star_count]
     	@books = Book.star_count
     else
-    	@books = Book.all
+    	@books = Book.all.order(params[:sort])
     end
     @book = Book.new
     @user = current_user
 
   end
 
-  def create
+  def create  #ここは模範解答例と同じ
     @book = Book.new(book_params)
     @book.user_id = current_user.id
     tag_list = params[:book][:tag].split(',')
@@ -48,10 +47,10 @@ class BooksController < ApplicationController
   end
 
   def update
-    @book = Book.find(params[:id])
-    tag_list=params[:book][:tag].split(',')
+    #@book = Book.find(params[:id])
+    #tag_list=params[:book][:tag].split(',')
     if @book.update(book_params)
-      @book.save_book_tags(tag_list)
+      #@book.save_book_tags(tag_list)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
       render "edit"

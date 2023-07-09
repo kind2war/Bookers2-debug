@@ -5,7 +5,7 @@
       <th>Title</th>
       <th>Opinion</th>
       <th>Tag</th>
-      <th colspan="4"></th>
+      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -19,14 +19,14 @@
         <td><%= link_to book.title,book %></td>
         <td><%= book.body.truncate(20, omission:"") %></td>
         <td>
-          <%= book.tags.each do |list| %>
-            <li style="list-style: none;"><%= link_to list.tag, search_tag_path(tag_id: list.id) %></li>
+          <% book.tags.each do |list| %>
+            <li style="list-style: none;"><%= link_to list.tag, search_tag_path(tag_id: list.id, model:"tag", method: "perfect") %></li>
           <% end %>
           </td>
-        <td  id="fav_btn_<%= book.id %>">
+        <td id="fav_btn_<%= book.id %>">
           <%= render 'favorites/fav', book: book %>
         </td>
-        <td><%= link_to "コメント数: #{book.book_comments.count}" ,book_path(book.id) %> </td>
+        <td><%= link_to "ｺﾒﾝﾄ: #{book.book_comments.count}" ,book_path(book.id) %> </td>
         <td><%= render "books/static.rate", book: book %></td>
         <td><% book.updated_at %></td>
       </tr>

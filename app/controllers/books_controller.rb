@@ -12,7 +12,6 @@ class BooksController < ApplicationController
   end
 
   def index
-    #@tag_list = Tag.all
     if params[:latest]
       @books = Book.latest
     elsif params[:old]
@@ -47,10 +46,10 @@ class BooksController < ApplicationController
   end
 
   def update
-    #@book = Book.find(params[:id])
-    #tag_list=params[:book][:tag].split(',')
+    @book = Book.find(params[:id])
+    tag_list=params[:book][:tag].split(',')
     if @book.update(book_params)
-      #@book.save_book_tags(tag_list)
+      @book.save_book_tags(tag_list)
       redirect_to book_path(@book), notice: "You have updated book successfully."
     else
       render "edit"

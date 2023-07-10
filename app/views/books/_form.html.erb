@@ -8,7 +8,8 @@
     <%= f.text_area :body, class: 'form-control book_body' %>
   </div>
   <label>Tag(,で区切って複数登録可)</label>
-    <%= f.text_field :tag, value: @tag_list, class: 'form-control' %>
+    <%#= f.text_field :tag, value: @tag_list, class: 'form-control' %>
+    <%= f.text_field :tag, class: 'form-control' %>
 
   <% if book.id.nil? %>
     <div class="form-group" id="post_raty">

@@ -10,11 +10,11 @@
   </tr>
   <tr>
     <th>follows</th>
-    <th><%= render 'users/follows', user: @user %></th>
+    <th><%= link_to user.following.count, following_user_path(user) %></th>
   </tr>
   <tr>
   <th>followers</th>
-  <th><%= render 'users/followers', user: @user %></th>
+  <th><%= link_to user.followers.count, followers_user_path(user)  %></th>
   </tr>
 </table>
 
@@ -29,14 +29,14 @@
     <%end%>
   <%end%>
 <!--チャット機能-->
-  <% unless @user.id == current_user.id %>
-    <% if (current_user.following? @user) && (@user.following? current_user)  %>
+  <% unless user.id == current_user.id %>
+    <% if (current_user.following? user) && (user.following? current_user)  %>
     <% if @isRoom == true %>
       <p class="user-show-room"><a href="/rooms/<%= @roomId %>" class="btn btn-primary btn-block">チャットへ</a>
     <% else %>
       <%= form_for @room do |f| %>
         <%= fields_for @entry do |e| %>
-          <%= e.hidden_field :user_id, value: @user.id %>
+          <%= e.hidden_field :user_id, value: user.id %>
         <% end %>
         <%= f.submit "チャットを始める", class:"btn btn-primary btn-block user-show-chat"%>
       <% end %>

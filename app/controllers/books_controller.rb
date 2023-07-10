@@ -4,10 +4,8 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
-    @user = User.find(@book.user.id)
     @book_comment = BookComment.new
     @tag_list = @book.tags.pluck(:tag).join(',')
-    @post_book_tags = @book.tags
 
   end
 
@@ -29,7 +27,6 @@ class BooksController < ApplicationController
     	@books = Book.all.order(params[:sort])
     end
     @book = Book.new
-    @user = current_user
   end
 
   def create  #ここは模範解答例と同じ
